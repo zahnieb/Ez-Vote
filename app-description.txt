@@ -1,0 +1,29 @@
+Team Name: 
+	Shockwave Monkeys
+
+Team Number: 
+	2
+
+Team Members: 
+	Tome Dudanov
+	Jason Swartz
+	Matthew Etter
+	Josh Lee
+	Zahir Nieblas Bedolla
+
+App Name: 
+	EasyVote
+
+App Description: 
+	App that takes your address upon registration and finds nearby voting booths. 
+	Display the voting place, hours when it's open, as well as a Link to its Google Maps location.
+
+Vision Statement:
+	EasyVote - For Americans who want to exercise their right to vote. EasyVote is a platform that helps you find voting polls near you.
+	
+Communication Plan:
+	We're going to use Discord and iMessage.
+
+Meeting Plan:
+	With TA: Tuesday at 3:30, In-Person
+	Team: Tuesday at 2:30 In-Person and Thursday Night on Discord
