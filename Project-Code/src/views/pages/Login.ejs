@@ -1,0 +1,67 @@
+<%- include ('../partials/Message') %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    <link rel="icon" href="./icon.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/uikit.css" />
+    <script src="js/uikit.js"></script>
+    <script src="js/uikit-icons.js"></script>
+</head>
+<body>
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+        <div class="uk-navbar-center">
+
+            <div class="uk-navbar-center-left">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-navbar-nav"><a href="#">Info</a></li>
+                    <li>
+                        <ul class="uk-navbar-nav">
+                            <li><a href="#">Where Can I Vote?</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <a class="uk-navbar-item uk-logo" href="#">EasyVote</a>
+            <div class="uk-navbar-center-right">
+                <ul class="uk-navbar-nav">
+                    <li><a href="#">Register</a></li>
+                </ul>
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">Sign In</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <center>
+        <div class="uk-container" style="background-color:white; height:600px; width:600px; margin-top:200px;">
+            <h1 style="font-family: Consolas, monaco, monospace; margin-top:100px;">Sign In</h1>
+            <form style="margin-top:100px;" action="" method="post">
+
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="username" id="username">
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                        <input class="uk-input" type="password" aria-label="Not clickable icon" name="password" id="password">
+                    </div>
+                </div>
+
+            </form>
+            <button type="submit" class="uk-button uk-button-default uk-button-large" style="margin-top:50px;">Sign In</button>
+            <p style="font-family: Consolas, monaco, monospace;"> Don't have an account? <a href="#"> Register.</a></p>
+        </div>
+    </center>
+
+</body>
+</html>
