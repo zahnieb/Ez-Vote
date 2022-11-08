@@ -1,3 +1,3 @@
 /* Test Insert */
-INSERT INTO user (username, password, addressLine1, addressLine2, city, state, zip_code)
-    VALUES (test', 'test', '12020 Circle point rd', '', 'westminster', 'colorado', '80020');
+INSERT INTO voters (username, password, addressLine1, addressLine2, city, state, zip_code)
+    VALUES ('test', 'test', '24 Scott Drive', '', 'Broomfield', 'CO', '80020');
