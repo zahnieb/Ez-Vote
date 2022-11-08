@@ -24,6 +24,10 @@ html {
  */
 body {
   margin: 0;
+  background-image:url('../bg.png');
+  background-color:aliceblue;
+  height:1050px;
+  background-repeat:no-repeat;
 }
 /* Links
  ========================================================================== */
