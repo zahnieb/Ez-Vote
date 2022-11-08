@@ -5,5 +5,5 @@ CREATE TABLE voters(
     addressLine2 VARCHAR(40),
     city VARCHAR(30) NOT NULL,
     state VARCHAR(20) NOT NULL,
-    zip_code SMALLINT NOT NULL
+    zip_code INTEGER NOT NULL
 );
