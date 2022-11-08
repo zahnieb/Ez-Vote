@@ -6,7 +6,6 @@ const session = require("express-session");
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 
-
 //define express application
 const app = express();
 
@@ -59,26 +58,33 @@ const user = {
 
 
 app.get('/', (req, res) =>{
-    
-    res.render('pages/login')
+    res.render('pages/info')
 });
 
 app.get('/test', (req, res)=>{
+    //Making db query to retrieve address before API call to get voterInfo
+    const query = "SELECT addressLine1, city, state, zip_code FROM voters WHERE username='test'";
+    let value = "";
+    db.any(query, value)
+        .then((data) =>{
+        value = data.addressLine1 + " " + data.city + " " + data.state + " " + data.zip_code;
+        })
+        .catch((error) => {
+                //hanlde errors
+                console.log(error);
+                res.redirect("/");
+        });
+    //API call
+    console.log(value);
     axios({
-         url: `https://www.googleapis.com/civicinfo/v2/voterinfo?address=2845%20trinity%20loop%20broomfield%20CO&includeOffices=true&levels=regional&roles=governmentOfficer&key=${process.env.API_KEY}`,
+            url: "https://civicinfo.googleapis.com/civicinfo/v2/voterinfo",
             method: 'GET',
             dataType:'json',
-            param: {
-                "address": "2845 trinity loop broomfield co",
-                "includeOffices": true,
-                "levels":[
-                    "regional"
-                ],
-                "roles": [
-                    "governmentOfficer"
-                ]
+            header: {
+                address: `${value}`,
+                authorization: `${process.env.API_KEY}`
             }
-         })
+            })
          .then(results => {
             //console.log(results.data);
             //console.log(results.data.election);
@@ -88,14 +94,12 @@ app.get('/test', (req, res)=>{
                 location: results.data.pollingLocations
             });
          })
-         .catch(error => {
-        //hanlde errors
-        res.render({
-        results: [],
-        error: error,
-        })
-    })
-});
+        .catch((error) => {
+            //hanlde errors
+            console.log(error);
+            res.redirect("/");
+        });
+    });
 
 
 app.listen(3000, () => {
