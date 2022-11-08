@@ -1,102 +1,115 @@
 <%- include ('../partials/message') %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-    <link rel="icon" href="./icon.ico" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/uikit.css" />
-    <script src="js/uikit.js"></script>
-    <script src="js/uikit-icons.js"></script>
-</head>
-<body>
-    <nav class="uk-navbar-container uk-margin" uk-navbar>
-        <div class="uk-navbar-center">
+    <!DOCTYPE html>
+    <html>
 
-            <div class="uk-navbar-center-left">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-navbar-nav"><a href="/info">Info</a></li>
-                    <li>
-                        <ul class="uk-navbar-nav">
-                            <li><a href="/wciv">Where Can I Vote?</a></li>
-                        </ul>
-                    </li>
-                </ul>
+    <head>
+        <title>Register</title>
+        <link rel="icon" href="./icon.ico" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.css" />
+        <script src="js/uikit.js"></script>
+        <script src="js/uikit-icons.js"></script>
+    </head>
+
+    <body>
+        <nav class="uk-navbar-container uk-margin" uk-navbar>
+            <div class="uk-navbar-center">
+
+                <div class="uk-navbar-center-left">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-navbar-nav"><a href="/info">Info</a></li>
+                        <li>
+                            <ul class="uk-navbar-nav">
+                                <li><a href="/wciv">Where Can I Vote?</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <a class="uk-navbar-item uk-logo" href="/">EasyVote</a>
+                <div class="uk-navbar-center-right">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-active"><a href="/register">Register</a></li>
+                    </ul>
+                    <ul class="uk-navbar-nav">
+                        <li><a href="/login">Sign In</a></li>
+                    </ul>
+
+                </div>
+
             </div>
-            <a class="uk-navbar-item uk-logo" href="/">EasyVote</a>
-            <div class="uk-navbar-center-right">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/register">Register</a></li>
-                </ul>
-                <ul class="uk-navbar-nav">
-                    <li><a href="/login">Sign In</a></li>
-                </ul>
+        </nav>
 
+        <center>
+            <div class="uk-container" style="background-color:white; height:700px; width:700px; margin-top:200px;">
+                <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">Register</h1>
+                <form action="/register" method="post" style="margin-top:50px;">
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="username"
+                                id="username" placeholder="Username" required minlength="8">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input" type="password" aria-label="Not clickable icon" name="password"
+                                id="password" placeholder="Password" required minlength="8">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon " uk-icon="icon: home"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine1"
+                                id="address" placeholder="Address Line 1" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon " uk-icon="icon: home"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine2"
+                                id="address" placeholder="Address Line 2 (Optional)">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon " uk-icon="icon: world"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="city" id="city"
+                                placeholder="City" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: location"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="state" id="state"
+                                placeholder="State" required>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: tag"></span>
+                            <input class="uk-input" type="text" aria-label="Not clickable icon" name="zip_code" id="zip"
+                                placeholder="ZIP Code" required>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="uk-button uk-button-default uk-button-large"
+                        style="margin-top:30px;">Register</button>
+                </form>
+                <p style="font-family: Consolas, monaco, monospace;"> Already have an account? <a href="/login"> Log
+                        in.</a></p>
             </div>
+        </center>
 
-        </div>
-    </nav>
+    </body>
 
-    <center>
-        <div class="uk-container" style="background-color:white; height:700px; width:700px; margin-top:200px;">
-            <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">Register</h1>
-            <form action="" method="post" style="margin-top:50px;">
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: user"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="username" id="username" placeholder="Username" required minlength="8">
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                        <input class="uk-input" type="password" aria-label="Not clickable icon" name="password" id="password" placeholder="Password" required minlength="8">
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon " uk-icon="icon: home"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="address" id="address" placeholder="Address Line 1" required>
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon " uk-icon="icon: home"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="address" id="address" placeholder="Address Line 2 (Optional)">
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon " uk-icon="icon: world"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="city" id="city" placeholder="City" required>
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: location"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="state" id="state" placeholder="State" required>
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: tag"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="zip" id="zip" placeholder="ZIP Code" required>
-                    </div>
-                </div>
-
-            </form>
-            <button type="submit" class="uk-button uk-button-default uk-button-large" style="margin-top:30px;">Register</button>
-            <p style="font-family: Consolas, monaco, monospace;"> Already have an account? <a href="/login"> Log in.</a></p>
-        </div>
-    </center>
-
-</body>
-</html>
+    </html>
