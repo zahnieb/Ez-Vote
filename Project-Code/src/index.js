@@ -70,21 +70,21 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
     axios({
-        url: `https://www.googleapis.com/civicinfo/v2/voterinfo?address=2845%20trinity%20loop%20broomfield%20CO&includeOffices=true&levels=regional&roles=governmentOfficer&key=${process.env.API_KEY}`,
-        method: 'GET',
-        dataType: 'json',
-        param: {
-            "address": "2845 trinity loop broomfield co",
-            "includeOffices": true,
-            "levels": [
-                "regional"
-            ],
-            "roles": [
-                "governmentOfficer"
-            ]
-        }
-    })
-        .then(results => {
+         url: `https://www.googleapis.com/civicinfo/v2/voterinfo?address=24%20Scott%20Drive%20broomfield%20CO&includeOffices=true&levels=regional&roles=governmentOfficer&key=${process.env.API_KEY}`,
+            method: 'GET',
+            dataType:'json',
+            param: {
+                "address": "24 Scott Drive broomfield co",
+                "includeOffices": true,
+                "levels":[
+                    "regional"
+                ],
+                "roles": [
+                    "governmentOfficer"
+                ]
+            }
+         })
+         .then(results => {
             //console.log(results.data);
             //console.log(results.data.election);
             console.log(results.data.pollingLocations);
@@ -102,6 +102,21 @@ app.get('/test', (req, res) => {
         })
 });
 
+app.get('/login', (req, res) =>{
+    res.render('pages/login')
+});
+
+app.get('/info', (req, res) =>{
+    res.render('pages/info')
+});
+
+app.get('/register', (req, res) =>{
+    res.render('pages/register')
+});
+
+app.get('/wciv', (req, res) =>{
+    res.render('pages/wciv')
+});
 
 app.listen(3000, () => {
     console.log('listening on port 3000');
