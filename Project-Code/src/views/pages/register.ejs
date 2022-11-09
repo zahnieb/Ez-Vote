@@ -1,4 +1,3 @@
-<%- include ('../partials/message') %>
     <!DOCTYPE html>
     <html>
 
@@ -52,7 +51,7 @@
 
             </div>
         </nav>
-
+        <%- include ('../partials/message') %>
         <center>
             <div class="uk-container" style="background-color:white; height:700px; width:700px; margin-top:200px;">
                 <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">Register</h1>
@@ -62,7 +61,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="username"
-                                id="username" placeholder="Username" required minlength="8">
+                                   id="username" placeholder="Username" required minlength="8">
                         </div>
                     </div>
 
@@ -70,7 +69,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: lock"></span>
                             <input class="uk-input" type="password" aria-label="Not clickable icon" name="password"
-                                id="password" placeholder="Password" required minlength="8">
+                                   id="password" placeholder="Password" required minlength="8">
                         </div>
                     </div>
 
@@ -78,7 +77,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon " uk-icon="icon: home"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine1"
-                                id="address" placeholder="Address Line 1" required>
+                                   id="address" placeholder="Address Line 1" required>
                         </div>
                     </div>
 
@@ -86,7 +85,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon " uk-icon="icon: home"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine2"
-                                id="address" placeholder="Address Line 2 (Optional)">
+                                   id="address" placeholder="Address Line 2 (Optional)">
                         </div>
                     </div>
 
@@ -94,7 +93,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon " uk-icon="icon: world"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="city" id="city"
-                                placeholder="City" required>
+                                   placeholder="City" required>
                         </div>
                     </div>
 
@@ -102,7 +101,7 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: location"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="state" id="state"
-                                placeholder="State" required>
+                                   placeholder="State" required>
                         </div>
                     </div>
 
@@ -110,16 +109,22 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: tag"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="zip_code" id="zip"
-                                placeholder="ZIP Code" required>
+                                   placeholder="ZIP Code" required>
                         </div>
                     </div>
 
 
                     <button type="submit" class="uk-button uk-button-default uk-button-large"
-                        style="margin-top:30px;">Register</button>
+                            style="margin-top:30px;">
+                        Register
+                    </button>
                 </form>
-                <p style="font-family: Consolas, monaco, monospace;"> Already have an account? <a href="/login"> Log
-                        in.</a></p>
+                <p style="font-family: Consolas, monaco, monospace;">
+                    Already have an account? <a href="/login">
+                        Log
+                        in.
+                    </a>
+                </p>
             </div>
         </center>
 
