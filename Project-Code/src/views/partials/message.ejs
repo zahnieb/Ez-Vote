@@ -1,6 +1,6 @@
 <% if (locals.message) { %>
-<div class="uk-alert-<%- locals.error ? 'danger' : 'success' %>"
-     role="alert">
-    <%= message %>
+<div class="uk-alert-<%- locals.error ? 'danger' : 'success' %>" uk-alert>
+    <a class="uk-alert-close" uk-close style="margin-right:20px;"></a>
+    <center><h3><%= message %></h3></center>
 </div>
     <% } %>
