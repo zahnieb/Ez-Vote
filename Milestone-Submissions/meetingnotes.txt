@@ -89,5 +89,9 @@ complete sign in for users
 
 
 Plan for next week:
+complete application features such as:
+  login, register, address civics lookup for polling places
+test application features
+test inputs for account registration and sign in.
 
 
