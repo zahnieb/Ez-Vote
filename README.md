@@ -1,7 +1,7 @@
 # CSCI3308-Group-13-02
 
 
-1. Eazyvote is a webpage that takes in your address and provides nearby polling stations for upcoming elections.
+1. EasyVote is a webpage that takes in your address and provides nearby polling stations for upcoming elections.
 Along with the polling stations address we provide hours of operation for the polling stations and rank them from 
 distance from you.
 
