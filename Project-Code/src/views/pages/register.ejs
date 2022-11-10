@@ -77,7 +77,9 @@
                         <div class="uk-inline">
                             <span class="uk-form-icon " uk-icon="icon: home"></span>
                             <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine1"
-                                   id="address" placeholder="Address Line 1" required>
+                                   id="address" placeholder="Address Line 1" 
+                                   pattern = "/\d+(\s+\w+){1,}\s+(?:st(?:\.|reet)?|dr(?:\.|ive)?|pl(?:\.|ace)?|ave(?:\.|nue)?|rd|road|lane|drive|way|court|plaza|square|run|parkway|point|pike|square|driveway|trace|park|terrace|blvd)/"
+                                   required>
                         </div>
                     </div>
 
