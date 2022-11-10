@@ -79,7 +79,7 @@ Tome:
 Front-end debugging
 
 -Number of commits
-6
+6 this week, 16 total
 
 Josh:
 -Work description
