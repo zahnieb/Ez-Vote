@@ -49,8 +49,16 @@ Work Tracker updates
 Work Tracker:
 Zahir Nieblas Bedolla:
 -Work description
-
+  backend calls to google civic api
+  docker yalm file setup
+  package.json file setup for npm install
+  create.sql for docker to create postgres table
+  insert.sql for test case inserts
+  views to render frontend pages
+  api calls with parameters
+  
 -Number of commits
+  6
 
 Matthew:
 -Work description
