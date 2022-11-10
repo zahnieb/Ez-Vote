@@ -62,8 +62,12 @@ Zahir Nieblas Bedolla:
 
 Matthew:
 -Work description
-
+ Updated README.md file twice.
+ Release notes
+ Working on sign-in page connection to backend sql.
+ 
 -Number of commits
+5
 
 Jason:
 -Work description
