@@ -58,16 +58,20 @@ const user = {
 
 
 app.get('/', (req, res) =>{
-    res.render('pages/info')
+    res.render('pages/login')
 });
 
 app.get('/test', (req, res)=>{
     //Making db query to retrieve address before API call to get voterInfo
-    const query = "SELECT addressLine1, city, state, zip_code FROM voters WHERE username='test'";
-    let value = "";
-    db.any(query, value)
-        .then((data) =>{
-        value = data.addressLine1 + " " + data.city + " " + data.state + " " + data.zip_code;
+    const query = "SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';";
+    const values = [user];
+
+    db.any(query, values)
+        .then(async (data) =>{
+            address = data.addressLine1 + data.city + data.state + data.zip_code;
+      console.log(data);
+      console.log(address);
+      console.log(data.addressLine1);
         })
         .catch((error) => {
                 //hanlde errors
@@ -75,14 +79,13 @@ app.get('/test', (req, res)=>{
                 res.redirect("/");
         });
     //API call
-    console.log(value);
+    console.log(values);
     axios({
-            url: "https://civicinfo.googleapis.com/civicinfo/v2/voterinfo",
+            url: `https://civicinfo.googleapis.com/civicinfo/v2/voterinfo?address=${user.address}&key=${process.env.API_KEY}`,
             method: 'GET',
             dataType:'json',
             header: {
-                address: `${value}`,
-                authorization: `${process.env.API_KEY}`
+                "address": `${user.address}`
             }
             })
          .then(results => {
@@ -97,7 +100,6 @@ app.get('/test', (req, res)=>{
         .catch((error) => {
             //hanlde errors
             console.log(error);
-            res.redirect("/");
         });
     });
 
