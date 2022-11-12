@@ -101,17 +101,17 @@ app.get('/test', async (req, res) =>{
             //dataType:'json',
             params: {
                 key : API_KEY,
-                address : address,
+                //address : address,
                 electionId: 2000
             }
         })
          .then(results => {
-            //console.log(results.data);
-            //console.log(results.data.election);
-            console.log(results.elections.name);
+            console.log(results);
+            console.log(results.data.elections[0].name);
+            console.log(results.data.elections[0].electionDay);
             res.render('pages/test', {
-                election: results.elections.name,
-                location: results.elections.electionDay
+                election: results.data.elections[0],
+                date: results.data.elections[0]
             });
          })
         .catch((error) => {
