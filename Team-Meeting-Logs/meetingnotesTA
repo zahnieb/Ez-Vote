@@ -1,0 +1,100 @@
+11/1/2022 Meeting 1
+
+
+
+
+
+
+OPENING DISCUSSION:
+Discussed website idea of eazyvote a website to help users find nearest polling locations for upcoming elections.
+Showed what was created so far including frontend of website and api test runs.
+Said what we have implemented so far and what we are going to implement including HTML page, API, and Hash that we are using for passwords and addresses.
+Talked about our use of Google API in our website.
+
+
+TO DO ASAP: 
+push into the milestone folder: google doc from last week's recitation and project code up to this point.
+Create issues on individual branches.
+Submit release notes by Thursday along with push.
+Reorganize the directory to match the file directories given so it is easier to read and understand.
+Reread directions on the project page for what is required as well as things to add to better our website.
+Finish list notes.
+
+
+GOALS FOR TUESDAY MEETING (11/8/22): 
+Get project functional (doesn’t have to be perfect but have main functionality working).
+divide up work into groups of two or individuals (will be decided at our thursday group meeting) and begin working on assignments.
+
+
+FUTURE GOALS:
+Work on the index file and think of more ideas to implement if there is time.
+Bring all of the aspects of our project together to create one functional website.
+
+
+REMINDERS: 
+Push commits 3 times a week. 
+Use different branches for each issue
+Make sure to read directions on the project page for whatever aspect we are working on.
+
+
+
+MEETING 2 11/08
+
+To Do:
+Release Notes
+Complete plan for next week
+Work Tracker updates
+
+
+Work Tracker:
+Zahir Nieblas Bedolla:
+-Work description
+  backend calls to google civic api
+  docker yalm file setup
+  package.json file setup for npm install
+  create.sql for docker to create postgres table
+  insert.sql for test case inserts
+  views to render frontend pages
+  api calls with parameters
+  
+-Number of commits
+  6
+
+Matthew:
+-Work description
+ Updated README.md file twice.
+ Release notes
+ Working on sign-in page connection to backend sql.
+ 
+-Number of commits
+5
+
+Jason:
+-Work description
+
+-Number of commits
+
+Tome:
+-Work description
+Front-end debugging
+
+-Number of commits
+6 this week, 16 total
+
+Josh:
+-Work description
+
+-Number of commits
+
+Plan for this week:
+Complete back-end integration for api calls
+complete sign in for users
+-complete front-end styling *front end css not loading css & js
+
+
+Plan for next week:
+complete application features such as:
+  login, register, address civics lookup for polling places
+test application features
+test inputs for account registration and sign in.
+

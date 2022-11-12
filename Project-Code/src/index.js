@@ -16,60 +16,57 @@ const dbConfig = {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-  };
-  
+};
+
 const db = pgp(dbConfig);
 
 // db connection test
 db.connect()
-  .then((obj) => {
-    // Can check the server version here (pg-promise v10.1.0+):
-    console.log("Database connection successful");
-    obj.done(); // success, release the connection;
-  })
-  .catch((error) => {
-    console.log("ERROR:", error.message || error);
-});
+    .then((obj) => {
+        // Can check the server version here (pg-promise v10.1.0+):
+        console.log("Database connection successful");
+        obj.done(); // success, release the connection;
+    })
+    .catch((error) => {
+        console.log("ERROR:", error.message || error);
+    });
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 
+
 // set session
 app.use(
     session({
-      secret: "XASDASDA",
-      saveUninitialized: true,
-      resave: true,
+        secret: "XASDASDA",
+        saveUninitialized: true,
+        resave: true,
     })
-  );
-  
+);
+
 app.use(
     bodyParser.urlencoded({
-      extended: true,
+        extended: true,
     })
 );
 
 const user = {
     username: undefined,
+    password: undefined,
     addressLine1: undefined,
     addressLine2: undefined,
     city: undefined,
     state: undefined,
-    zip_code: undefined
-}
+    zip_code: undefined,
+};
 
 const {API_KEY} = process.env
+
 
 app.get('/', (req, res) =>{
     res.render('pages/login')
 });
-
-//constant api call to civics API
-const civicRequest = axios.create({
-    baseURL: 'https://civicinfo.googleapis.com',
-     params: { 'apiKey': API_KEY } 
-     });
 
 //test request for api call to polling locations with test user
 app.get('/test', async (req, res) =>{
@@ -113,6 +110,7 @@ app.get('/test', async (req, res) =>{
                 election: results.data.elections[0],
                 date: results.data.elections[0]
             });
+
          })
         .catch((error) => {
             //hanlde errors
@@ -120,7 +118,62 @@ app.get('/test', async (req, res) =>{
         });
     });
 
+app.get('/info', (req, res) =>{
+    res.render('pages/info')
+});
+
+app.get('/register', (req, res) =>{
+    res.render('pages/register')
+});
+
+app.get('/wciv', (req, res) =>{
+    res.render('pages/wciv')
+});
 
 app.listen(3000, () => {
     console.log('listening on port 3000');
+});
+
+app.get('/register', (req, res) => {
+    res.render('pages/register', {});
+});
+
+app.get('/login', (req, res) => {
+    console.log(user.username + 
+        user.password + 
+        user.addressLine1 + 
+        user.addressLine2 +
+        user.city + 
+        user.state + 
+        user.zip_code);
+    res.render('pages/login', {});
+});
+
+// Register submission
+app.post('/register', async (req, res) => {
+    const query = 'INSERT INTO voters (username, password, addressLine1, addressLine2, city, state, zip_code) VALUES ($1, $2, $3, $4, $5, $6, $7)';
+    //const hash = await bcrypt.hash(req.body.password, 10);
+    db.any(query, [
+        req.body.username,
+        req.body.password,
+        req.body.addressLine1,
+        req.body.addressLine2,
+        req.body.city,
+        req.body.state,
+        req.body.zip_code
+    ])
+        .then(function (data) {
+            user.username = req.body.username;
+            user.password = req.body.password;
+            user.addressLine1 = req.body.addressLine1;
+            user.addressLine2 = req.body.addressLine2;
+            user.city = req.body.city;
+            user.state = req.body.state;
+            user.zip_code = req.body.zip_code;
+            res.redirect('/login');
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.redirect('/register');
+        });
 });

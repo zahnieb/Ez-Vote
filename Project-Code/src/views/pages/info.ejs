@@ -2,12 +2,25 @@
 <html>
 <head>
     <title>Info</title>
-    <link rel="icon" href="./icon.ico" />
+    <link rel="icon" href="https://i.ibb.co/qDZGp0C/united-states.png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/uikit.css" />
-    <script src="js/uikit.js"></script>
-    <script src="js/uikit-icons.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.12/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.12/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.12/dist/js/uikit-icons.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background-image: url('https://i.ibb.co/3Sm6ZXD/bg.webp');
+            background-color: aliceblue;
+            background-size: 1500px 1060px;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body>
     <nav class="uk-navbar-container uk-margin" uk-navbar>
@@ -15,21 +28,23 @@
 
             <div class="uk-navbar-center-left">
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#">Info</a></li>
+
+                    <li class="uk-active"><a href="/info">Info</a></li>
                     <li>
                         <ul class="uk-navbar-nav">
-                            <li><a href="#">Where Can I Vote?</a></li>
+                            <li><a href="/wciv">Where Can I Vote?</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <a class="uk-navbar-item uk-logo" href="#">EasyVote</a>
+
+            <a class="uk-navbar-item uk-logo" href="/">EasyVote</a>
             <div class="uk-navbar-center-right">
                 <ul class="uk-navbar-nav">
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="/settings">Settings</a></li>
                 </ul>
                 <ul class="uk-navbar-nav">
-                    <li><a href="#">Sign Out</a></li>
+                    <li><a href="/logout">Sign Out</a></li>
                 </ul>
 
             </div>

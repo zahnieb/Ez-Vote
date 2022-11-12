@@ -1,0 +1,12 @@
+Release Notes: 
+
+Novemeber 10th 2022
+
+  Front-end:
+    Login, Register, settings_password and settings_address updated so alert appears in correct place.
+    Front end debugged so css is visable when site is run.
+    message.ejs is finished.
+    
+   Backend: 
+     Register connection from front end to backend is complete and ready to enter testing.
+     API is working correctly and ready for implementation.
