@@ -56,9 +56,12 @@ Zahir Nieblas Bedolla:
   insert.sql for test case inserts
   views to render frontend pages
   api calls with parameters
+  fixed api call due to elections ending
+  corrected db query for api call param
+  table path and frontend table view results from api call
   
 -Number of commits
-  6
+  9
 
 Matthew:
 -Work description
