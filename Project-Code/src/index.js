@@ -122,10 +122,6 @@ app.get('/info', (req, res) =>{
     res.render('pages/info')
 });
 
-app.get('/register', (req, res) =>{
-    res.render('pages/register')
-});
-
 app.get('/wciv', async (req, res) =>{
      //Making db query to retrieve address before API call to get voterInfo
      const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';`;
@@ -220,7 +216,8 @@ app.get('/register', (req, res) => {
 // Register submission
 app.post('/register', async (req, res) => {
     const query = 'INSERT INTO voters (username, password, addressLine1, addressLine2, city, state, zip_code) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-    //const hash = await bcrypt.hash(req.body.password, 10);
+    //hash password for register
+    const hash = await bcrypt.hash(req.body.password, 10);
     db.any(query, [
         req.body.username,
         req.body.password,
@@ -232,7 +229,7 @@ app.post('/register', async (req, res) => {
     ])
         .then(function (data) {
             user.username = req.body.username;
-            user.password = req.body.password;
+            hash.password = req.body.password;
             user.addressLine1 = req.body.addressLine1;
             user.addressLine2 = req.body.addressLine2;
             user.city = req.body.city;
