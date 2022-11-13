@@ -181,19 +181,40 @@ app.listen(3000, () => {
     console.log('listening on port 3000');
 });
 
-app.get('/register', (req, res) => {
-    res.render('pages/register', {});
+app.get('/login', (req, res) => {
+    res.render('pages/login');
 });
 
-app.get('/login', (req, res) => {
-    console.log(user.username + 
-        user.password + 
-        user.addressLine1 + 
-        user.addressLine2 +
-        user.city + 
-        user.state + 
-        user.zip_code);
-    res.render('pages/login', {});
+//user Sign in
+app.post('/login', async (req, res) => {
+    const user = req.body.username;
+    const query = "SELECT * FROM voters WHERE username = $1";
+    const values = [user];
+
+    db.one(query,values)
+        .then(async(data)=> {
+            user.username = data.username;
+            user.password = data.password;
+            const match = await bcrypt.compare(req.body.password, data.password);
+
+            console.log(user.username);
+            if (match != 1){
+                //add error message in message.ejs call
+            } else {
+                req.session.save();
+            }
+            
+            res.redirect("/wciv");
+            })
+        .catch((err) =>{
+            console.log(err);
+            res.redirect("/register")
+        });
+});
+
+
+app.get('/register', (req, res) => {
+    res.render('pages/register', {});
 });
 
 // Register submission
@@ -224,3 +245,8 @@ app.post('/register', async (req, res) => {
             res.redirect('/register');
         });
 });
+
+app.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/login");
+  });
