@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const axios = require('axios');
 const bcrypt = require('bcrypt');
+const { nextTick } = require("process");
 
 //define express application
 const app = express();
@@ -65,7 +66,7 @@ const {API_KEY} = process.env
 
 
 app.get('/', (req, res) =>{
-    res.render('pages/login')
+    res.redirect('/login')
 });
 
 //test request for api call to polling locations with test user
@@ -123,6 +124,10 @@ app.get('/info', (req, res) =>{
 });
 
 app.get('/wciv', async (req, res) =>{
+    if(!req.session.user){
+        return res.redirect('/login');
+    }
+
      //Making db query to retrieve address before API call to get voterInfo
      const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';`;
      const values = [user];
@@ -178,6 +183,9 @@ app.listen(3000, () => {
 });
 
 app.get('/login', (req, res) => {
+    if(req.session.user){
+        return res.redirect('/wciv');
+    }
     res.render('pages/login');
 });
 
@@ -186,17 +194,23 @@ app.post('/login', async (req, res) => {
     const user = req.body.username;
     const query = "SELECT * FROM voters WHERE username = $1";
     const values = [user];
+    
 
-    db.one(query,values)
-        .then(async(data)=> {
+    await db.one(query,values)
+        .then(async (data)=> {
             user.username = data.username;
             user.password = data.password;
             const match = await bcrypt.compare(req.body.password, data.password);
 
-            console.log(user.username);
-            if (match != 1){
+            console.log(match);
+            if (match != false){
                 //add error message in message.ejs call
+                //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
             } else {
+                req.session.user = {
+                    username: user.username
+                }
+                console.log(req.session.user);
                 req.session.save();
             }
             
