@@ -59,9 +59,11 @@ Zahir Nieblas Bedolla:
   fixed api call due to elections ending
   corrected db query for api call param
   table path and frontend table view results from api call
+  sign in setup to match username & password
+  modified logout to destroy session & log user out successfully
   
 -Number of commits
-  9
+  10
 
 Matthew:
 -Work description
