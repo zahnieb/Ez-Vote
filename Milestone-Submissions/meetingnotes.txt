@@ -61,9 +61,10 @@ Zahir Nieblas Bedolla:
   table path and frontend table view results from api call
   sign in setup to match username & password
   modified logout to destroy session & log user out successfully
+  setup hash password when registering and matching with sign in password
   
 -Number of commits
-  10
+  11
 
 Matthew:
 -Work description
