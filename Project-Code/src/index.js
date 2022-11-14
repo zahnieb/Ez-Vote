@@ -66,7 +66,8 @@ const {API_KEY} = process.env
 
 
 app.get('/', (req, res) =>{
-    res.redirect('/login')
+    res.redirect('/wciv') //if user was logged in and closed the site, when he opens it he'll be redirected to wciv.
+    //if he's not logged in, wciv will just redirect him to the login page anyway.
 });
 
 //test request for api call to polling locations with test user
@@ -119,7 +120,12 @@ app.get('/test', async (req, res) =>{
         });
     });
 
-app.get('/info', (req, res) =>{
+app.get('/info', (req, res) => {
+
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
     res.render('pages/info')
 });
 
@@ -206,6 +212,7 @@ app.post('/login', async (req, res) => {
             if (match != false){
                 //add error message in message.ejs call
                 //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
+                res.render('pages/login', {message:"Incorrect username or password."}) //if passwords don't match, render with a message.
             } else {
                 req.session.user = {
                     username: user.username
@@ -218,13 +225,13 @@ app.post('/login', async (req, res) => {
             })
         .catch((err) =>{
             console.log(err);
-            res.redirect("/register")
+            res.render("pages/login", {message:"Incorrect username or password."}) //if username doesn't exist in database, render with message.
         });
 });
 
 
 app.get('/register', (req, res) => {
-    res.render('pages/register', {});
+    res.render('pages/register');
 });
 
 // Register submission
@@ -253,7 +260,8 @@ app.post('/register', async (req, res) => {
         })
         .catch(function (err) {
             console.log(err);
-            res.redirect('/register');
+            res.render('pages/register', { message: "That username is already taken." });
+            //added error message functionality if username entered is taken.
         });
 });
 
