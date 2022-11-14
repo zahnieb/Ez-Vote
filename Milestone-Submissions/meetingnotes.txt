@@ -56,9 +56,18 @@ Zahir Nieblas Bedolla:
   insert.sql for test case inserts
   views to render frontend pages
   api calls with parameters
+  fixed api call due to elections ending
+  corrected db query for api call param
+  table path and frontend table view results from api call
+  sign in setup to match username & password
+  modified logout to destroy session & log user out successfully
+  setup hash password when registering and matching with sign in password
+  only signed in users can view wciv page
+  fixed easyvote navbar bug that would take you to a duplicate sign in page, now redirects to wciv if logged in, if not logged in takes you to login page
+  small sql table bug fix where table would create unecessary space for password characters
   
 -Number of commits
-  6
+  13
 
 Matthew:
 -Work description

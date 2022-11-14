@@ -8,14 +8,7 @@
 </head>
 <body>
     <h2><%= election.name %></h2>
-    <% let loc = location %>
-    <% loc.forEach(element => { %>
-        <h1><%= element.address.locationName %></h1>
-        <h2><%= element.address.line1 %></h2>
-        <h2><%= element.address.city %></h2>
-        <h2><%= element.address.state %></h2>
-        <h2><%= element.address.startDate %></h2>
-        <h3><%= element.pollingHours %></h3>
-    <%}); %>
+    <% elecDate = date.electionDay %>
+    <h2><%= elecDate %></h2>
 </body>
 </html>
