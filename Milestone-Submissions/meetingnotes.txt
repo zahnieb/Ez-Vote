@@ -108,3 +108,45 @@ test application features
 test inputs for account registration and sign in.
 
 
+
+
+
+MEETING 3 11/15
+
+To-Do:
+  Email professor with screenshot of VoterInfoQuery no longer working.
+  Hard-code election-id, email professor and tell him that we spoke to Nathan.
+  We must merge all branches and delete them by the end of the week. 
+  Make issues for remaining bugs
+  Make issue for settings page, assign to Jason
+  Table for poll data. If time permits, do cards instead of poll data because it looks fancier for presentation.
+  Go through project guide for all team members, once back from fall break, testing can be done for the first 3 days
+  Book slots for presentation in recitation
+  Update meeting minutes
+  Another meeting during recitation this week, extra credit / work time
+
+Goals for this week:
+  Finish up project
+  Start testing process
+  Make website look nicer and more presentable
+
+Misc:
+  We have no contact with Josh
+  VoterInfoQuery was working before elections, all we needed was address, now it is electionUnknown.
+
+Work Tracker:
+  Zahir
+    34 commits
+    Getting API call to work, login page
+  Matthew
+    8 commits
+    Adding sign-in functionality
+    Housekeeping w/ releasenotes and meetingnotes
+  Jason
+    7 commits
+    Working on settings, settings_address, and settings_password
+  Tome
+    14 commits
+    Polls page frontend, Login page frontend
+	
+
