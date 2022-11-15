@@ -121,11 +121,6 @@ app.get('/test', async (req, res) =>{
     });
 
 app.get('/info', (req, res) => {
-
-    if (!req.session.user) {
-        return res.redirect('/login');
-    }
-
     res.render('pages/info')
 });
 
