@@ -265,6 +265,29 @@ app.post('/register', async (req, res) => {
         });
 });
 
+app.put('/settings_address', function (req, res) {
+    const query = 'UPDATE voters SET addressLine1 = $1, addressLine2 = $2 city = $3, state = $4, zip_code = $5 WHERE username = $6' 
+    db.any(query, [req.body.addressLine1, req.body.addressLine2, req.body.city, req.body.state, req.body.zip_code, user.username])
+      .then(function (data) {
+        res.status(201).json({
+          status: 'success',
+          data: data,
+          message: 'data updated successfully',         
+        });
+        console.log(user.username + 
+            user.password + 
+            user.addressLine1 + 
+            user.addressLine2 +
+            user.city + 
+            user.state + 
+            user.zip_code);
+        res.redirect('/settings');
+      })
+      .catch(function (err) {
+        return console.log(err);
+      });
+  });
+
 app.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/login");
