@@ -265,9 +265,18 @@ app.post('/register', async (req, res) => {
         });
 });
 
-app.get("/pages/settings", (req, res) => {
+app.get("/settings", (req, res) => {
     res.render('pages/settings');
 });
+
+app.get("/settings_address", (req, res) => {
+    res.render('pages/settings_address');
+});
+
+app.get("/settings_password", (req, res) => {
+    res.render('pages/settings_password');
+});
+
 
 app.put('/settings_address', function (req, res) {
     const query = 'UPDATE voters SET addressLine1 = $1, addressLine2 = $2 city = $3, state = $4, zip_code = $5 WHERE username = $6' 
