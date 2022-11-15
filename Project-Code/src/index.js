@@ -121,7 +121,7 @@ app.get('/test', async (req, res) =>{
     });
 
 app.get('/info', (req, res) => {
-    res.render('pages/info')
+    res.render('pages/info',{s : req.session.user})
 });
 
 app.get('/wciv', async (req, res) =>{

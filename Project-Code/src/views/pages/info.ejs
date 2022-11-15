@@ -42,17 +42,14 @@
             <div class="uk-navbar-center-right">
 
                 <!--If the user is logged in, display settings and sign out-->
-                <% if (req.session.user) { %> 
+                <% if (s) { %> 
                 <ul class="uk-navbar-nav">
                     <li><a href="/settings">Settings</a></li>
                 </ul>
                 <ul class="uk-navbar-nav">
                     <li><a href="/logout">Sign Out</a></li>
                 </ul>
-                <% } %>
-
-                <!--Else, meaning user is NOT logged in, display register and login.-->
-                <% else { %>
+                <% } else { %>
                 <ul class="uk-navbar-nav">
                     <li><a href="/register">Register</a></li>
                 </ul>
