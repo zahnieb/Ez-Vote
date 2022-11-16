@@ -192,7 +192,7 @@ app.get('/login', (req, res) => {
 
 //user Sign in
 app.post('/login', async (req, res) => {
-    const query = "select * from users where username = $1";
+    const query = "select * from voters where username = $1";
     db.one(query, [
         req.body.username
     ])
@@ -200,11 +200,16 @@ app.post('/login', async (req, res) => {
             const match = await bcrypt.compare(req.body.password, user.password);
             //const values = [match];
             if (match) {
-                req.session.user = {
-                    api_key: process.env.API_KEY,
-                };
+                user.username = data.username;
+                user.addressLine1 = data.addressLine1;
+                user.addressLine2 = data.addressLine2;
+                user.city = data.city;
+                user.state = data.state;
+                user.zip_code = data.zip_code;
+
+                req.session.user = user;
                 req.session.save();
-                res.redirect("/discover");
+                res.redirect("/wciv");
             } else {   
                 res.render('pages/login', { message: "Incorrect username or password." })        
             }
@@ -283,12 +288,12 @@ app.post('/register', async (req, res) => {
 
 app.get("/settings", (req, res) => {
     res.render('pages/settings', {
-        username: user.username,
-        addressLine1: user.addressLine1,
-        addressLine2: user.addressLine2,
-        city: user.city,
-        state: user.state,
-        zip_code: user.zip_code
+        username: req.session.user.username,
+        addressLine1: req.session.user.addressLine1,
+        addressLine2: req.session.user.addressLine2,
+        city: req.session.user.city,
+        state: req.session.user.state,
+        zip_code: req.session.user.zip_code
     });
 });
 
