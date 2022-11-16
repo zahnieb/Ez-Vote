@@ -215,7 +215,12 @@ app.post('/login', async (req, res) => {
                 res.render('pages/login', {message:"Incorrect username or password."}) //if passwords don't match, render with a message.
             } else {
                 req.session.user = {
-                    username: user.username
+                    username: user.username,
+                    addressLine1: user.addressLine1,
+                    addressLine2: user.addressLine2,
+                    city: user.city,
+                    state: user.state,
+                    zip_code: user.zip_code
                 }
                 console.log(req.session.user);
                 req.session.save();
@@ -266,7 +271,14 @@ app.post('/register', async (req, res) => {
 });
 
 app.get("/settings", (req, res) => {
-    res.render('pages/settings');
+    res.render('pages/settings', {
+        username: user.username,
+        addressLine1: user.addressLine1,
+        addressLine2: user.addressLine2,
+        city: user.city,
+        state: user.state,
+        zip_code: user.zip_code
+    });
 });
 
 app.get("/settings_address", (req, res) => {
