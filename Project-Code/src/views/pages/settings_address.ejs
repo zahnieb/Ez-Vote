@@ -54,18 +54,18 @@
         <div class="uk-container" style="background-color:white; height:600px; width:600px; margin-top:200px;">
             <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">Settings</h1>
             <h3 style="font-family: Consolas, monaco, monospace; margin-top:20px;"> Change Your Address </h3>
-            <form action="" method="post" style="margin-top:50px;">
+            <form action="/settings_address" method="post" style="margin-top:50px;">
                 <div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon " uk-icon="icon: home"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="address" id="address" placeholder="Address Line 1" required>
+                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine1" id="address" placeholder="Address Line 1" required>
                     </div>
                 </div>
 
                 <div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon " uk-icon="icon: home"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="address" id="address" placeholder="Address Line 2 (Optional)">
+                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="addressLine2" id="address" placeholder="Address Line 2 (Optional)">
                     </div>
                 </div>
 
@@ -86,12 +86,12 @@
                 <div class="uk-margin">
                     <div class="uk-inline">
                         <span class="uk-form-icon" uk-icon="icon: tag"></span>
-                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="zip" id="zip" placeholder="ZIP Code" required>
+                        <input class="uk-input" type="text" aria-label="Not clickable icon" name="zip_code" id="zip" placeholder="ZIP Code" required>
                     </div>
                 </div>
 
+                <button type="submit" class="uk-button uk-button-default uk-button-large" style="margin-top:30px;">Update</button>
             </form>
-            <button type="submit" class="uk-button uk-button-default uk-button-large" style="margin-top:30px;">Update</button>
         </div>
     </center>
 
