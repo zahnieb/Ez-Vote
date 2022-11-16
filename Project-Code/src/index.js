@@ -197,17 +197,17 @@ app.post('/login', async (req, res) => {
         req.body.username
     ])
         .then(async (data) => {
-            const match = await bcrypt.compare(req.body.password, user.password);
+            const match = await bcrypt.compare(req.body.password, data.password);
             //const values = [match];
             if (match) {
                 user.username = data.username;
-                user.addressLine1 = data.addressLine1;
-                user.addressLine2 = data.addressLine2;
+                user.addressLine1 = data.addressline1;
+                user.addressLine2 = data.addressline2;
                 user.city = data.city;
                 user.state = data.state;
                 user.zip_code = data.zip_code;
 
-                req.session.user = user;
+                req.session.user = user;          
                 req.session.save();
                 res.redirect("/wciv");
             } else {   
@@ -218,36 +218,6 @@ app.post('/login', async (req, res) => {
             console.log(err);
             res.redirect("/register");
         });
-    // const user = req.body.username;
-    // const query = "SELECT * FROM voters WHERE username = $1";
-    // const values = [user];
-
-
-    // await db.one(query, values)
-    //     .then(async (data) => {
-    //         user.username = data.username;
-    //         user.password = data.password;
-    //         const match = await bcrypt.compare(req.body.password, data.password);
-
-    //         console.log(match);
-    //         if (match != false) {
-    //             //add error message in message.ejs call
-    //             //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
-    //             res.render('pages/login', { message: "Incorrect username or password." }) //if passwords don't match, render with a message.
-    //         } else {
-    //             req.session.user = {
-    //                 username: user.username,
-    //             }
-    //             console.log(req.session.user);
-    //             req.session.save();
-    //         }
-
-    //         res.redirect("/wciv");
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //         res.render("pages/login", { message: "Incorrect username or password." }) //if username doesn't exist in database, render with message.
-    //     });
 });
 
 
@@ -315,6 +285,8 @@ app.post('/settings_address', function (req, res) {
             user.city = req.body.city;
             user.state = req.body.state;
             user.zip_code = req.body.zip_code;
+            req.session.user = user;          
+            req.session.save();
             res.redirect('/settings');
         })
         .catch(function (err) {
