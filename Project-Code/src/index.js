@@ -294,23 +294,14 @@ app.post('/settings_address', function (req, res) {
         });
 });
 
-app.post('/settings_password', function (req, res) {
+app.post('/settings_password', async (req, res) => {
     const query = 'UPDATE voters SET password = $1 WHERE username = $2'
-    db.any(query, [req.body.password, user.username])
+    const hash = await bcrypt.hash(req.body.password, 10);
+    db.any(query, [hash, req.session.user.username])
         .then(function (data) {
-            user.password = req.body.password;
-            res.redirect('/settings');
-        })
-        .catch(function (err) {
-            return console.log(err);
-        });
-});
-
-app.post('/settings_password', function (req, res) {
-    const query = 'UPDATE voters SET password = $1,  WHERE username = $2'
-    db.any(query, [req.body.password, user.username])
-        .then(function (data) {
-            user.password = req.body.password;
+            user.password = hash;
+            req.session.user.password = hash;          
+            req.session.save();
             res.redirect('/settings');
         })
         .catch(function (err) {
