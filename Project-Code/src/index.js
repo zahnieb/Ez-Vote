@@ -192,36 +192,57 @@ app.get('/login', (req, res) => {
 
 //user Sign in
 app.post('/login', async (req, res) => {
-    const user = req.body.username;
-    const query = "SELECT * FROM voters WHERE username = $1";
-    const values = [user];
-
-
-    await db.one(query, values)
+    const query = "select * from users where username = $1";
+    db.one(query, [
+        req.body.username
+    ])
         .then(async (data) => {
-            user.username = data.username;
-            user.password = data.password;
-            const match = await bcrypt.compare(req.body.password, data.password);
-
-            console.log(match);
-            if (match != false) {
-                //add error message in message.ejs call
-                //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
-                res.render('pages/login', { message: "Incorrect username or password." }) //if passwords don't match, render with a message.
-            } else {
+            const match = await bcrypt.compare(req.body.password, user.password);
+            //const values = [match];
+            if (match) {
                 req.session.user = {
-                    username: user.username,
-                }
-                console.log(req.session.user);
+                    api_key: process.env.API_KEY,
+                };
                 req.session.save();
+                res.redirect("/discover");
+            } else {   
+                res.render('pages/login', { message: "Incorrect username or password." })        
             }
-
-            res.redirect("/wciv");
         })
         .catch((err) => {
             console.log(err);
-            res.render("pages/login", { message: "Incorrect username or password." }) //if username doesn't exist in database, render with message.
+            res.redirect("/register");
         });
+    // const user = req.body.username;
+    // const query = "SELECT * FROM voters WHERE username = $1";
+    // const values = [user];
+
+
+    // await db.one(query, values)
+    //     .then(async (data) => {
+    //         user.username = data.username;
+    //         user.password = data.password;
+    //         const match = await bcrypt.compare(req.body.password, data.password);
+
+    //         console.log(match);
+    //         if (match != false) {
+    //             //add error message in message.ejs call
+    //             //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
+    //             res.render('pages/login', { message: "Incorrect username or password." }) //if passwords don't match, render with a message.
+    //         } else {
+    //             req.session.user = {
+    //                 username: user.username,
+    //             }
+    //             console.log(req.session.user);
+    //             req.session.save();
+    //         }
+
+    //         res.redirect("/wciv");
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //         res.render("pages/login", { message: "Incorrect username or password." }) //if username doesn't exist in database, render with message.
+    //     });
 });
 
 
@@ -236,7 +257,7 @@ app.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
     db.any(query, [
         req.body.username,
-        req.body.password,
+        hash,
         req.body.addressLine1,
         req.body.addressLine2,
         req.body.city,
@@ -245,7 +266,7 @@ app.post('/register', async (req, res) => {
     ])
         .then(function (data) {
             user.username = req.body.username;
-            hash.password = req.body.password;
+            user.password = hash;
             user.addressLine1 = req.body.addressLine1;
             user.addressLine2 = req.body.addressLine2;
             user.city = req.body.city;
@@ -282,7 +303,6 @@ app.get("/settings_password", (req, res) => {
 
 app.post('/settings_address', function (req, res) {
     const query = 'UPDATE voters SET addressLine1 = $1, addressLine2 = $2, city = $3, state = $4, zip_code = $5 WHERE username = $6'
-    console.log(user.username);
     db.any(query, [req.body.addressLine1, req.body.addressLine2, req.body.city, req.body.state, req.body.zip_code, user.username])
         .then(function (data) {
             user.addressLine1 = req.body.addressLine1;
@@ -290,6 +310,18 @@ app.post('/settings_address', function (req, res) {
             user.city = req.body.city;
             user.state = req.body.state;
             user.zip_code = req.body.zip_code;
+            res.redirect('/settings');
+        })
+        .catch(function (err) {
+            return console.log(err);
+        });
+});
+
+app.post('/settings_password', function (req, res) {
+    const query = 'UPDATE voters SET password = $1 WHERE username = $2'
+    db.any(query, [req.body.password, user.username])
+        .then(function (data) {
+            user.password = req.body.password;
             res.redirect('/settings');
         })
         .catch(function (err) {
