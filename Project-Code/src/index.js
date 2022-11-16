@@ -306,6 +306,18 @@ app.post('/settings_password', function (req, res) {
         });
 });
 
+app.post('/settings_password', function (req, res) {
+    const query = 'UPDATE voters SET password = $1,  WHERE username = $2'
+    db.any(query, [req.body.password, user.username])
+        .then(function (data) {
+            user.password = req.body.password;
+            res.redirect('/settings');
+        })
+        .catch(function (err) {
+            return console.log(err);
+        });
+});
+
 app.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/login");
