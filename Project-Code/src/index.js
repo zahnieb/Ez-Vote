@@ -282,7 +282,6 @@ app.get("/settings_password", (req, res) => {
 
 app.post('/settings_address', function (req, res) {
     const query = 'UPDATE voters SET addressLine1 = $1, addressLine2 = $2, city = $3, state = $4, zip_code = $5 WHERE username = $6'
-    console.log(user.username);
     db.any(query, [req.body.addressLine1, req.body.addressLine2, req.body.city, req.body.state, req.body.zip_code, user.username])
         .then(function (data) {
             user.addressLine1 = req.body.addressLine1;
@@ -290,6 +289,18 @@ app.post('/settings_address', function (req, res) {
             user.city = req.body.city;
             user.state = req.body.state;
             user.zip_code = req.body.zip_code;
+            res.redirect('/settings');
+        })
+        .catch(function (err) {
+            return console.log(err);
+        });
+});
+
+app.post('/settings_password', function (req, res) {
+    const query = 'UPDATE voters SET password = $1,  WHERE username = $2'
+    db.any(query, [req.body.password, user.username])
+        .then(function (data) {
+            user.password = req.body.password;
             res.redirect('/settings');
         })
         .catch(function (err) {
