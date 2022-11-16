@@ -297,7 +297,7 @@ app.post('/settings_address', function (req, res) {
 });
 
 app.post('/settings_password', function (req, res) {
-    const query = 'UPDATE voters SET password = $1,  WHERE username = $2'
+    const query = 'UPDATE voters SET password = $1 WHERE username = $2'
     db.any(query, [req.body.password, user.username])
         .then(function (data) {
             user.password = req.body.password;
