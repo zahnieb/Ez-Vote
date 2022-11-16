@@ -53,40 +53,18 @@
     <center>
         <div class="uk-container" style="background-color:white; height:600px; width:600px; margin-top:200px;">
             <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">My Info</h1>
-            <table class="table">
-                <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>USERNAME</td>
-                    <td><%= username %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>ADDRESS LINE 2</td>
-                    <td><%= addressLine1 %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>ADDRESS LINE 2</td>
-                    <td><%= addressLine2 %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>CITY</td>
-                    <td><%= city %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>STATE</td>
-                    <td><%= state %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td>ZIP CODE</td>
-                    <td><%= zip_code %></td>
-                  </tr>
-                </tbody>
-              </table>
+            <p style="font-family: Consolas, monaco, monospace;">Username:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= username %></p>
+            <p style="font-family: Consolas, monaco, monospace;">Address Line 1:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= addressLine1 %></p>
+            <p style="font-family: Consolas, monaco, monospace;">Address Line 2:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= addressLine2 %></p>
+            <p style="font-family: Consolas, monaco, monospace;">City:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= city %></p>
+            <p style="font-family: Consolas, monaco, monospace;">State:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= state %></p>
+            <p style="font-family: Consolas, monaco, monospace;">Zip Code:</p>
+            <p style="font-family: Consolas, monaco, monospace; font-style: italic;"><%= zip_code %></p>
             <h1 style="font-family: Consolas, monaco, monospace; margin-top:20px;">Settings</h1>
             <p><a class="uk-button uk-button-default uk-button-large" style="margin-top:150px;" href="/settings_address">Change Your Address</a></p>
             <p><a class="uk-button uk-button-default uk-button-large" href="/settings_password">Change Your Password</a> </p>
