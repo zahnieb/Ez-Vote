@@ -192,35 +192,31 @@ app.get('/login', (req, res) => {
 
 //user Sign in
 app.post('/login', async (req, res) => {
-    const user = req.body.username;
-    const query = "SELECT * FROM voters WHERE username = $1";
-    const values = [user];
-
-
-    await db.one(query, values)
+    const query = "select * from voters where username = $1";
+    db.one(query, [
+        req.body.username
+    ])
         .then(async (data) => {
-            user.username = data.username;
-            user.password = data.password;
             const match = await bcrypt.compare(req.body.password, data.password);
+            //const values = [match];
+            if (match) {
+                user.username = data.username;
+                user.addressLine1 = data.addressline1;
+                user.addressLine2 = data.addressline2;
+                user.city = data.city;
+                user.state = data.state;
+                user.zip_code = data.zip_code;
 
-            console.log(match);
-            if (match != false) {
-                //add error message in message.ejs call
-                //test case for false ** return res.json({success: false, message: 'passwords do not match'}); **
-                res.render('pages/login', { message: "Incorrect username or password." }) //if passwords don't match, render with a message.
-            } else {
-                req.session.user = {
-                    username: user.username,
-                }
-                console.log(req.session.user);
+                req.session.user = user;          
                 req.session.save();
+                res.redirect("/wciv");
+            } else {   
+                res.render('pages/login', { message: "Incorrect username or password." })        
             }
-
-            res.redirect("/wciv");
         })
         .catch((err) => {
             console.log(err);
-            res.render("pages/login", { message: "Incorrect username or password." }) //if username doesn't exist in database, render with message.
+            res.redirect("/register");
         });
 });
 
@@ -236,7 +232,7 @@ app.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
     db.any(query, [
         req.body.username,
-        req.body.password,
+        hash,
         req.body.addressLine1,
         req.body.addressLine2,
         req.body.city,
@@ -245,7 +241,7 @@ app.post('/register', async (req, res) => {
     ])
         .then(function (data) {
             user.username = req.body.username;
-            hash.password = req.body.password;
+            user.password = hash;
             user.addressLine1 = req.body.addressLine1;
             user.addressLine2 = req.body.addressLine2;
             user.city = req.body.city;
@@ -262,12 +258,12 @@ app.post('/register', async (req, res) => {
 
 app.get("/settings", (req, res) => {
     res.render('pages/settings', {
-        username: user.username,
-        addressLine1: user.addressLine1,
-        addressLine2: user.addressLine2,
-        city: user.city,
-        state: user.state,
-        zip_code: user.zip_code
+        username: req.session.user.username,
+        addressLine1: req.session.user.addressLine1,
+        addressLine2: req.session.user.addressLine2,
+        city: req.session.user.city,
+        state: req.session.user.state,
+        zip_code: req.session.user.zip_code
     });
 });
 
@@ -282,7 +278,6 @@ app.get("/settings_password", (req, res) => {
 
 app.post('/settings_address', function (req, res) {
     const query = 'UPDATE voters SET addressLine1 = $1, addressLine2 = $2, city = $3, state = $4, zip_code = $5 WHERE username = $6'
-    console.log(user.username);
     db.any(query, [req.body.addressLine1, req.body.addressLine2, req.body.city, req.body.state, req.body.zip_code, user.username])
         .then(function (data) {
             user.addressLine1 = req.body.addressLine1;
@@ -290,6 +285,20 @@ app.post('/settings_address', function (req, res) {
             user.city = req.body.city;
             user.state = req.body.state;
             user.zip_code = req.body.zip_code;
+            req.session.user = user;          
+            req.session.save();
+            res.redirect('/settings');
+        })
+        .catch(function (err) {
+            return console.log(err);
+        });
+});
+
+app.post('/settings_password', function (req, res) {
+    const query = 'UPDATE voters SET password = $1 WHERE username = $2'
+    db.any(query, [req.body.password, user.username])
+        .then(function (data) {
+            user.password = req.body.password;
             res.redirect('/settings');
         })
         .catch(function (err) {
