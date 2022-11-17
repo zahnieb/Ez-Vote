@@ -55,14 +55,18 @@
             <h3 style="font-family: Consolas, monaco, monospace; margin-top:10px;">Voting Polls Near You</h3>
             <table class="uk-table" style="margin-left:45px;">
                 <tr>
-                    <th>Name</th>
-                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Office</th>
+                    <th>District</th>
                 </tr>
-                <% let data = results.data.elections; %>
+                <% let data = contests; %>
+                <% let district = results.data.election.date; %>
+                <!--Contests-->
                 <% data.forEach((element) => { %>
                     <tr>
-                        <th><%= element.name %></th>
-                        <th><%= element.electionDay %></th>
+                        <th><%= element.type; %></th>
+                        <th><%= element.office; %></th>
+                        <th><%= element.district.name %></th>
                     </tr>
                 <% }); %>
                 <!--TODO: add JavaScript to fill this table-->
