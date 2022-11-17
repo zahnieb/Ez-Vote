@@ -70,56 +70,6 @@ app.get('/', (req, res) => {
     //if he's not logged in, wciv will just redirect him to the login page anyway.
 });
 
-//test request for api call to polling locations with test user
-app.get('/test', async (req, res) => {
-    //Making db query to retrieve address before API call to get voterInfo
-    const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';`;
-    const values = [user];
-
-    //await to complete query & assign values
-    await db.any(query, values)
-        .then((data) => {
-            user.addressLine1 = data[0].addressline1;
-            user.addressLine2 = data[0].addressline2;
-            user.city = data[0].city;
-            user.state = data[0].state;
-            user.zip_code = data[0].zip_code;
-        })
-        .catch((err) => {
-            console.log(err);
-            res.redirect("/");
-        });
-
-    //set address for api call
-    let address = `${user.addressLine1} ${user.addressLine2} ${user.city} ${user.state} ${user.zip_code}`;
-
-    //axios API get request
-    axios({
-        url: `https://www.googleapis.com/civicinfo/v2/elections`,
-        method: 'GET',
-        //dataType:'json',
-        params: {
-            key: API_KEY,
-            //address : address,
-            electionId: 2000
-        }
-    })
-        .then(results => {
-            console.log(results);
-            console.log(results.data.elections[0].name);
-            console.log(results.data.elections[0].electionDay);
-            res.render('pages/test', {
-                election: results.data.elections[0],
-                date: results.data.elections[0]
-            });
-
-        })
-        .catch((error) => {
-            //hanlde errors
-            console.log(error);
-        });
-});
-
 app.get('/info', (req, res) => {
     res.render('pages/info',{s : req.session.user})
 });
@@ -152,23 +102,21 @@ app.get('/wciv', async (req, res) => {
 
     //axios API get request
     axios({
-        url: `https://www.googleapis.com/civicinfo/v2/elections`,
+        url: `https://www.googleapis.com/civicinfo/v2/voterinfo`,
         method: 'GET',
         //dataType:'json',
         params: {
             key: API_KEY,
-            //address commented until we figure out what to do about API error as elections are over and returns are invalid
-            //address : address,
+            address : address,
             electionId: 2000
         }
     })
         .then(results => {
-            console.log(results);
-            console.log(results.data.elections[0].name);
-            console.log(results.data.elections[0].electionDay);
+
             res.render('pages/wciv', {
-                election: results.data.elections[0],
-                date: results.data.elections[0],
+                election: results.data.election.name,
+                date: results.data.election.date,
+                contests: results.data.contests,
                 results: results
             });
 
@@ -313,3 +261,54 @@ app.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/login");
 });
+
+
+/*test request for api call to polling locations with test user
+app.get('/test', async (req, res) => {
+    //Making db query to retrieve address before API call to get voterInfo
+    const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';`;
+    const values = [user];
+
+    //await to complete query & assign values
+    await db.any(query, values)
+        .then((data) => {
+            user.addressLine1 = data[0].addressline1;
+            user.addressLine2 = data[0].addressline2;
+            user.city = data[0].city;
+            user.state = data[0].state;
+            user.zip_code = data[0].zip_code;
+        })
+        .catch((err) => {
+            console.log(err);
+            res.redirect("/");
+        });
+
+    //set address for api call
+    let address = `${user.addressLine1} ${user.addressLine2} ${user.city} ${user.state} ${user.zip_code}`;
+
+    //axios API get request
+    axios({
+        url: `https://www.googleapis.com/civicinfo/v2/elections`,
+        method: 'GET',
+        //dataType:'json',
+        params: {
+            key: API_KEY,
+            //address : address,
+            electionId: 2000
+        }
+    })
+        .then(results => {
+            console.log(results);
+            console.log(results.data.elections[0].name);
+            console.log(results.data.elections[0].electionDay);
+            res.render('pages/test', {
+                election: results.data.elections[0],
+                date: results.data.elections[0]
+            });
+
+        })
+        .catch((error) => {
+            //hanlde errors
+            console.log(error);
+        });
+}); */
