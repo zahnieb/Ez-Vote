@@ -80,7 +80,7 @@ app.get('/wciv', async (req, res) => {
     }
 
     //Making db query to retrieve address before API call to get voterInfo
-    const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username='test';`;
+    const query = `SELECT addressLine1, addressLine2, city, state, zip_code FROM voters WHERE username = '${user.username}';`;
     const values = [user];
 
     //await to complete query & assign values
