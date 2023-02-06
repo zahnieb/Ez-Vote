@@ -1,4 +1,4 @@
-# CSCI3308-Group-13-02
+# EzVote
 
 
 1. EasyVote is a webpage that takes in your address and provides nearby polling stations for upcoming elections.
